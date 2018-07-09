@@ -15,7 +15,7 @@
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <link rel="stylesheet" href="./style/main.css">
+      <link rel="stylesheet" href="./style/main.css">
   </head>
   <body>
     <div class="jumbotron jumbotron-fluid">
@@ -27,20 +27,38 @@
         </p>
       </div>
     </div>
-    <div class = "container">
-      <div class="row">
-        <div id="sidebar" class="col-4">
-          <ul class="list-group">
+    <div class = "wrapper">
+        <div id="sidebar">
+          <ul class="post-list">
           </ul>
         </div>
+        <div id="content">
+          <section>
+            <header>
+              <h2>Test</h2>
+              <hr>
+            </header>
+            <article>
+              <p>Test</p>
+            </article>
+            <aside>
+              <ul class="nav">
+                <li class="nav-item">
+                  <a class="nav-link" id="edit-post">Edit</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link text-danger" id="delete-post">Delete</a>
+                </li>
+              </ul>
+            </aside>
+          </section>
+        </div>
       </div>
-      <div id="view" class="col-8">
-      </div>
-    </div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/bundle.js"></script>
   </body>
 </html>

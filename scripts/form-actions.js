@@ -1,3 +1,5 @@
+const populate= require('./populate-posts.js')
+
 function populateForm(){
   const form =
   `<form id="post-form>
@@ -14,6 +16,37 @@ function populateForm(){
 const content = document.querySelector('#content')
 
 content.innerHTML = form;
+
+const submitButton = document.querySelector('button')
+submitButton.addEventListener('click', submitNewPost)
+}
+
+function submitNewPost(event){
+  event.preventDefault();
+  const titleBox = document.querySelector('input[id="title"]')
+  const title = titleBox.value
+  const contentBox = document.querySelector('textarea[id="content"]')
+  const content = contentBox.value
+
+  if(title.trim()===""||content.trim()==="") {
+
+    titleBox.classList.add('error');
+    contentBox.classList.add('error');
+
+// remove the class after the animation completes
+    setTimeout(function() {
+      titleBox.classList.remove('error');
+      contentBox.classList.remove('error');
+    }, 300);
+
+  } else {
+    return axios.post('https://mysterious-taiga-32819.herokuapp.com/posts/', {
+      title, content
+    }).then(function(result) {
+       console.log(result)
+       return populate.renderPage()
+    })
+  }
 }
 
 module.exports = {

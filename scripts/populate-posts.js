@@ -24,7 +24,7 @@ function populatePostList(posts){
                     <hr>
                   </header>
                   <article>
-                    <p>${post.content}</p>
+                    <p id='post-content'>${post.content}</p>
                   </article>
                   <aside>
                     <ul class="nav">
@@ -40,21 +40,86 @@ function populatePostList(posts){
     const content = document.querySelector('#content')
     content.innerHTML = update;
 
-    const deleteButton = document.querySelector('#delete-post')
-    const delID = deleteButton.getAttribute("name")
-    deleteButton.addEventListener("click", function(){
-      const delURL = `${URL}${delID}`
-      return axios.delete(delURL).then(function(result) {
-         console.log(result)
-         return renderPage()
-      })
-    })
+   deleteSetAction()
+   changeSetAction()
     })
   })
 
   const content = document.querySelector('#content')
   content.innerHTML = ''; //clears the content portion after a new post has been made or site has been re-rendered
 }
+
+function deleteSetAction(){
+  const deleteButton = document.querySelector('#delete-post')
+  const delID = deleteButton.getAttribute("name")
+  deleteButton.addEventListener("click", function(){
+    const delURL = `${URL}${delID}`
+    return axios.delete(delURL).then(function(result) {
+       console.log(result)
+       return renderPage()
+    })
+  })
+}
+
+function changeSetAction(){
+  const editButton = document.querySelector('#edit-post')
+  editButton.addEventListener("click", populateEditForm)
+}
+
+function populateEditForm(){
+const title = document.querySelector('h2').textContent
+const content = document.querySelector('#post-content').innerHTML
+const editID = document.querySelector('#edit-post').getAttribute("name")
+
+const form =
+  `<form id="post-form>
+      <div class="form-group">
+        <label for="title" value=>Title</label>
+        <input type="text" class="form-control" id="title" value='${title}'>
+      </div>
+      <div class="form-group">
+        <label for="title">Content</label>
+        <textarea type="text" rows="6" class="form-control" id="content">${content}</textarea>
+      </div>
+      <button type="submit" class="btn btn-info btn-large" name=${editID}>Update Post</button>
+    </form>`;
+const update = document.querySelector('#content')
+update.innerHTML = form;
+
+const submitButton = document.querySelector('button')
+submitButton.addEventListener('click', editPost)
+}
+
+function editPost(event){
+  event.preventDefault();
+  const titleBox = document.querySelector('input[id="title"]')
+  const title = titleBox.value
+  const contentBox = document.querySelector('textarea[id="content"]')
+  const content = contentBox.value
+  const editID = document.querySelector('button').getAttribute('name')
+  const editURL = URL + editID
+
+  if(title.trim()===""||content.trim()==="") {
+
+    titleBox.classList.add('error');
+    contentBox.classList.add('error');
+
+// remove the class after the animation completes
+    setTimeout(function() {
+      titleBox.classList.remove('error');
+      contentBox.classList.remove('error');
+    }, 300);
+
+  } else {
+    return axios.put(editURL, {
+      title, content
+    }).then(function(result) {
+       console.log(result)
+       return renderPage()
+    })
+  }
+}
+
 
 module.exports = {
   populatePostList,

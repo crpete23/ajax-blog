@@ -1,3 +1,4 @@
+const URL = 'https://mysterious-taiga-32819.herokuapp.com/posts/'
 const populate= require('./populate-posts.js')
 
 function populateForm(){
@@ -48,6 +49,7 @@ function submitNewPost(event){
     })
   }
 }
+
 
 module.exports = {
   populateForm

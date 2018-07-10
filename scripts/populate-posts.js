@@ -29,10 +29,10 @@ function populatePostList(posts){
                   <aside>
                     <ul class="nav">
                       <li class="nav-item">
-                        <a class="nav-link" id="edit-post" name="${post.id}">Edit</a>
+                        <a class="nav-link" id="edit-post" href="#/posts/${post.id}/edit" name="${post.id}">Edit</a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link text-danger" id="delete-post" name="${post.id}">Delete</a>
+                        <a class="nav-link text-danger" href="#" id="delete-post" name="${post.id}">Delete</a>
                       </li>
                     </ul>
                   </aside>
